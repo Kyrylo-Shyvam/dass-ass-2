@@ -167,6 +167,7 @@ def rageEnd():
 def healStart():
     COC.color = Back.LIGHTYELLOW_EX + "  " + Style.RESET_ALL
     # Bug - must be 'townhall', leads to crash.
+    # And heal spell must heal troops, not buildings.
     Townhall.health = (3/2)*Townhall.health # Must be capped?
     for hut in Hut.hutsList:
         hut.health = (3/2)*hut.health
@@ -282,4 +283,4 @@ while(1):
         
 
 
-    
+

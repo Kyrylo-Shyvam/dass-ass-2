@@ -19,4 +19,14 @@
 * x for this move.
 * All buildings close to barbarian king suffer damage.
 
+### idArray in gameclass.py -
+* 0 - nothing
+* 1 - King?
+* 2 - Hut
+* 3 - Cannon
+* 4 - Townhall?
+* 7 - Walls
+* 9 - barbarians
+
+
 

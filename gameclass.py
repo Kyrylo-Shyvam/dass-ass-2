@@ -6,7 +6,7 @@ import numpy as np
 colorama.init(autoreset=TRUE)
 columns = 80
 rows = 40
-# idArray = 
+# idArray =
 # 0 - nothing
 # 1 - King?
 # 2 - Hut
