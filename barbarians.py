@@ -22,7 +22,7 @@ class Barbarians:
         else:
             self.color = Back.LIGHTBLACK_EX + "  " + Style.RESET_ALL
             self.death = True
-        
+
         colorArray[self.coordinates[0]][self.coordinates[1]] = self.color
         return colorArray
     def idUpdate(self,idArray):
@@ -37,15 +37,12 @@ class Barbarians:
             print('barbPeek')
             min_distance = 1000
             for building in Building.buildingList:
-                
                 if(distance(self.coordinates[0],self.coordinates[1],building.coordinates[0],building.coordinates[1])<min_distance):
-                    
-
-                    
+                    # Choose closest target
                     if(building.death==False):
                         self.target = building
                         min_distance = distance(self.coordinates[0],self.coordinates[1],building.coordinates[0],building.coordinates[1])
-                    
+            # If only town hall is left, covered with walls, will they move?
             self.occupied = True
             
         if(self.target.health<=0):
@@ -54,21 +51,22 @@ class Barbarians:
        
     ##barbarian movement
     def move(self,idArray):
-        if(self.target!=None):
-            if(self.coordinates[0]<self.target.coordinates[0]):
+        if(self.target!=None): # Target exists
+            if(self.coordinates[0]<self.target.coordinates[0]): # Move right-wards if there is nothing or other barbarians
                 if(idArray[self.coordinates[0]+1][self.coordinates[1]]==0 or idArray[self.coordinates[0]+1][self.coordinates[1]]==9):
                     self.coordinates[0]+=self.velocity
-            elif(self.coordinates[0]>self.target.coordinates[0]):
+            elif(self.coordinates[0]>self.target.coordinates[0]): # Move left
                 if(idArray[self.coordinates[0]-1][self.coordinates[1]]==0 or idArray[self.coordinates[0]-1][self.coordinates[1]]==9):
                     self.coordinates[0]-=self.velocity
-            elif(self.coordinates[1]<self.target.coordinates[1]):
+            elif(self.coordinates[1]<self.target.coordinates[1]): # Move up
                 if(idArray[self.coordinates[0]][self.coordinates[1]+1]==0 or idArray[self.coordinates[0]][self.coordinates[1]+1]==9):
                     self.coordinates[1]+=self.velocity
-            elif(self.coordinates[1]>self.target.coordinates[1]):
+            elif(self.coordinates[1]>self.target.coordinates[1]): # Move down
                 if(idArray[self.coordinates[0]][self.coordinates[1]-1]==0 or idArray[self.coordinates[0]][self.coordinates[1]-1]==9):
                     self.coordinates[1]-=self.velocity
+
             if(abs(self.coordinates[0]-self.target.coordinates[0])<=1 and abs(self.coordinates[1]-self.target.coordinates[1])<=1):
-                self.target.health-=2
+                self.target.health-=2 #Damage target
                 if(self.target.health<=0):
                     self.occupied = False
                     self.target = None

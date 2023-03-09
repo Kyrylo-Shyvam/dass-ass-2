@@ -124,7 +124,7 @@ class Wall(Building):
     wallsList = []
     def __init__(self, x, y):
         super().__init__(x,y)
-        
+
     def render(self, colorArray):
         
         if(self.health <= 0):

@@ -6,17 +6,24 @@ import numpy as np
 colorama.init(autoreset=TRUE)
 columns = 80
 rows = 40
-
+# idArray = 
+# 0 - nothing
+# 1 - King?
+# 2 - Hut
+# 3 - Cannon
+# 4 - Townhall?
+# 7 - Walls
+# 9 - barbarians
 ##colorArray = [[Back.BLACK+" "+Style.RESET_ALL for i in range(columns)]for j in range(rows)]
 class Game:
     def __init__(self, rows, columns):
-        ##baseColor = 
+        ##baseColor =
         ##colorArray = [[Back.LIGHTGREEN_EX+str(i)+str(j)+" "+Style.RESET_ALL for i in range(columns)]for j in range(rows)]
         
         ## printing the Town Hall
         self.color = Back.LIGHTGREEN_EX + " " + Style.RESET_ALL
         self.colorArray= [[self.color for i in range(columns)]for j in range(rows)]
-        self.idArray = [[0 for i in range(columns)]for j in range(rows)]       
+        self.idArray = [[0 for i in range(columns)]for j in range(rows)]
 
 
         

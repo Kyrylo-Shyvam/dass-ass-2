@@ -1,12 +1,14 @@
 from array import array
-from distutils.spawn import spawn
-from pickle import TRUE
+from distutils.spawn import spawn # Why do we need this; not used?
+from pickle import TRUE  # Used to auto reset colorama. Why?
 import time
 import colorama
 from colorama import Fore, Back, Style
 import time
 from townhall import Townhall
-colorama.init(autoreset=TRUE)
+# If you find yourself repeatedly sending reset sequences to turn off color changes
+# at the end of every print, then init(autoreset=True) will automate that:
+colorama.init(autoreset=TRUE) 
 import numpy as np
 from gameclass import Game
 from kingclass import King
@@ -25,47 +27,60 @@ for i in range(10):
         arrays[i][j] = Back.BLUE+Fore.RED+"  "+Style.RESET_ALL
 
 print("\n".join(["".join(row) for row in arrays])) """
+
 fileNum=1
 if not os.path.exists('./replay'):
     os.makedirs('./replay')
     
 file="./replay/game"
 Check = True
+
 while(Check):
     if(os.path.exists(file+str(fileNum)+".txt")):
         fileNum+=1
-        Check = True
+        Check = True # Not required
     else:
         Check = False
-num=str(fileNum)
-file=file+num+".txt"
-rageTime = -1
-healTime = time.time()
+
+num=str(fileNum) # Number of files in replay directory + 1 extra
+file=file+num+".txt" # Name of new file?
+
+rageTime = -1    # Is it not working?
+healTime = time.time() # Time since 1970, why?
+
 rows = 40
-columns = 80
+columns = 80 # Already mentioned in gameclass?
+
 COC=Game(rows,columns)
 king = King()
-COC.render()
+COC.render()  
+#  What render exactly does?
+# It prints a self.colorArray, final output to be shown.
 townhall = Townhall()
+
 victory = ['v','i','c','t','o','r','y','!']
 defeat = ['d','e','f','e','a','t',':','(']
 
 hutsCoordinates = [[8,2],[13,60],[35,73],[7,15],[37,72]]
-hutsList = []
+hutsList = [] # Is this list of working huts? No. All huts objects
 
 for i in range(5):
     hut = Hut(hutsCoordinates[i][0],hutsCoordinates[i][1])
-    
     COC.colorArray = hut.render(COC.colorArray)
+    # Rendering saved a hut image on board.
     hutsList.append(hut)
 
 canonPositions = [[20,60],[35,20]]
 canonsList = []
 for i in range(2):
     canon = Canon(canonPositions[i][0],canonPositions[i][1])
+    # Same for cannons
     COC.colorArray = canon.render(COC.colorArray)
     canonsList.append(canon)
+
 wallsList = []
+# We create walls in the middle of the map
+# We do not render them?
 for i in (18,23):
     for j in range(6):
         wall = Wall(i,int(columns/2)-2+j)
@@ -77,17 +92,25 @@ for i in range(3):
         wall = Wall(int(rows/2)-1+i,j)
         ##COC.colorArray = wall.render(COC.colorArray)
         wallsList.append(wall)
-barbariansList = []
+
 Hut.hutsList = hutsList
 Canon.canonsList = canonsList
 Wall.wallsList = wallsList
+
+barbariansList = []
 Barbarians.barbariansList = barbariansList
+# Why these comments?
 """ getch = Get()
 for i in range(100):
     print(input_to(getch)) """
+
 def renderHuts():
+    # We already had a function to render in Huts
+    # This one renders all of them. And updates id, which is stored.
     for i in range(len(Hut.hutsList)):
         COC.colorArray=Hut.hutsList[i].render(COC.colorArray)
+        # Id array tells id (of object) at each coordinate.
+        # Actually we need only this one 2D array. Other can be deleted.
         COC.idArray = Hut.hutsList[i].idUpdate(COC.idArray)
 
 def renderCanons():
@@ -108,6 +131,7 @@ def renderBarbarians():
 def canonShoot():
     for i in range(len(canonsList)):
         canonsList[i].shoot(king,Barbarians)
+
 def spawn(key):
     if(key == 'z'):
         barbarian = Barbarians(38,22)
@@ -142,8 +166,8 @@ def rageEnd():
 
 def healStart():
     COC.color = Back.LIGHTYELLOW_EX + "  " + Style.RESET_ALL
-    
-    Townhall.health = (3/2)*Townhall.health
+    # Bug - must be 'townhall', leads to crash.
+    Townhall.health = (3/2)*Townhall.health # Must be capped?
     for hut in Hut.hutsList:
         hut.health = (3/2)*hut.health
         if(hut.health>10):
@@ -189,6 +213,7 @@ def checkDefeat():
 
 def narikey():
     for building in Building.buildingList:
+        # Damage buildings near king
         if(abs(building.coordinates[0]-king.coordinates[0])< 5 and abs(building.coordinates[1]-king.coordinates[1]) < 5):
             building.health = building.health - 5
  
@@ -198,12 +223,12 @@ def moveBarbarians():
         barbarian.move(COC.idArray)
 
 while(1):
-    
-        
+
+
     COC.board(rows,columns)
     COC.idArray = townhall.idUpdate(COC.idArray)
     COC.colorArray =  townhall.render(COC.colorArray, COC.idArray)
-    
+
     renderHuts()
     renderCanons()
     renderWalls()
@@ -211,7 +236,7 @@ while(1):
     moveBarbarians()
     renderBarbarians()
 
-    key = king.input()
+    key = king.input() # Input should be separate from king
     king.move(COC.idArray)
     
     spawn(key)

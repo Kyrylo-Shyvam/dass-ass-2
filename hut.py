@@ -8,6 +8,7 @@ class Hut:
         self.health = 10
         self.death = False
     def render(self,colorArray):
+        # Coordinates of hut are updated.
         if(self.health <=0):
             self.color = Back.LIGHTBLACK_EX + str(self.health) + Style.RESET_ALL
             self.death = True

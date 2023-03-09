@@ -9,7 +9,7 @@ from input import input_to, Get
 class King: 
     def __init__(self):
         getch = Get()
-        self.coordinates = [25,55]
+        self.coordinates = [25,55] # which portion of king are those even showing?
         self.rows = 2
         self.columns = 2
         self.color = Back.CYAN + " " + Style.RESET_ALL 
@@ -31,30 +31,31 @@ class King:
             ##print(idArray[self.coordinates[0]-1][self.coordinates[1]-2],idArray[self.coordinates[0]][self.coordinates[1]-2])
             print(idArray[self.coordinates[0]-2][self.coordinates[1]-1], idArray[self.coordinates[0]-2][self.coordinates[1]])
             if(self.coordinates[0]> 1 and  self.coordinates[0] < 39):
+                # Vertical cords. Check condition is not working well. King hangs at borders.
+                # SHould allow him to move through barbarians.
                 if(idArray[self.coordinates[0]-2][self.coordinates[1]-1]==0 and idArray[self.coordinates[0]-2][self.coordinates[1]]==0):
-                
                     self.coordinates[0]-= self.velocity
+
         elif(self.key=='s'):
             if(self.coordinates[0]> 1 and  self.coordinates[0] < 39):
                 if(idArray[self.coordinates[0]+1][self.coordinates[1]-1]==0 and idArray[self.coordinates[0]+1][self.coordinates[1]]==0):
-                
                     self.coordinates[0]+=self.velocity
+
         elif(self.key=='a'):
             ##print(idArray[self.coordinates[0]-2][self.coordinates[1]-1])
             if(self.coordinates[1]>1 and self.coordinates[1]<79):
                 if(idArray[self.coordinates[0]-1][self.coordinates[1]-2]==0 and idArray[self.coordinates[0]][self.coordinates[1]-2]==0):
-                
-                    
                     self.coordinates[1]-=self.velocity
             
         elif(self.key=='d'):
             if(self.coordinates[1]>1 and self.coordinates[1]<79):
                 if(idArray[self.coordinates[0]-1][self.coordinates[1]+1]==0 and idArray[self.coordinates[0]][self.coordinates[1]+1]==0):
-                
                     self.coordinates[1]+=self.velocity
+
         elif(self.key == ' '):
             if(self.coordinates[1]>1 and self.coordinates[1]<79 and self.coordinates[0]> 1 and  self.coordinates[0] < 39):
                 pass
+
     def attack(self,COC,Townhall,hut,canon,wall):
         hutsList = hut.hutsList
         canonsList = canon.canonsList
@@ -63,56 +64,66 @@ class King:
         ##print(wall.wallsList)
         if(self.coordinates[1]>1 and self.coordinates[1]<79 and self.coordinates[0]> 1 and  self.coordinates[0] < 39):
             if(COC.idArray[self.coordinates[0]-2][self.coordinates[1]-1]!=0 or COC.idArray[self.coordinates[0]-2][self.coordinates[1]]!=0):
-                
+                # Everything here can be abstracted out
+                # Upper row is wall
                 if(COC.idArray[self.coordinates[0]-2][self.coordinates[1]-1]==7 or COC.idArray[self.coordinates[0]-2][self.coordinates[1]]==7):
                    length = len(wallsList)
                    for i in range(length):
                         Wall = wallsList[i]
                         
-                        
+                        # left upper wall
                         if(Wall.coordinates[0]==self.coordinates[0]-2 and Wall.coordinates[1]==self.coordinates[1]-1 and Wall.health!=0):
                             print(1000)
                             Wall.health -= 1 
                             if(Wall.health==0):
-                                
                                 COC.idArray[self.coordinates[0]-2][self.coordinates[1]-1] = 0
+                        # right upper wall
                         if(Wall.coordinates[0]==self.coordinates[0]-2 and Wall.coordinates[1] == self.coordinates[1] and Wall.health!=0):
                             print(1000)
                             Wall.health -= 1 
                             if(Wall.health==0):
-                                    
                                 COC.idArray[self.coordinates[0]-2][self.coordinates[1]] = 0
-                        
+                
+                # Upper row is hut
                 if(COC.idArray[self.coordinates[0]-2][self.coordinates[1]-1]==2 or COC.idArray[self.coordinates[0]-2][self.coordinates[1]]==2):
                     length = len(hutsList)
                     for i in range(length):
                         Hut = hutsList[i]
+                        # upper left
                         if(Hut.coordinates[0]==self.coordinates[0]-2 and Hut.coordinates[1]==self.coordinates[1]-1 and Hut.health!=0):
                             Hut.health -= 1 
+                        # Upper right
                         if(Hut.coordinates[0]==self.coordinates[0]-2 and Hut.coordinates[1] == self.coordinates[1] and Hut.health!=0):
                             Hut.health -= 1 
+
                         if(Hut.health == 0):
                             COC.idArray[self.coordinates[0]-2][self.coordinates[1]-1] = 0
                             COC.idArray[self.coordinates[0]-2][self.coordinates[1]] = 0
+                
+                # Upper row is cannon
                 if(COC.idArray[self.coordinates[0]-2][self.coordinates[1]-1]==3 or COC.idArray[self.coordinates[0]-2][self.coordinates[1]]==3):
                     length = len(canonsList)
                     for i in range(length):
                         Canon = canonsList[i]
+                        # upper left
                         if(Canon.coordinates[0]==self.coordinates[0]-2 and Canon.coordinates[1]==self.coordinates[1]-1 and Canon.health!=0):
-                            Canon.health -= 1 
+                            Canon.health -= 1
+                        # Upper right
                         if(Canon.coordinates[0]==self.coordinates[0]-2 and Canon.coordinates[1] == self.coordinates[1] and Canon.health!=0):
                             Canon.health -= 1 
                         if(Canon.health == 0):
                             COC.idArray[self.coordinates[0]-2][self.coordinates[1]-1] = 0
                             COC.idArray[self.coordinates[0]-2][self.coordinates[1]] = 0
+
+                # Townhall is on upper row
                 if(COC.idArray[self.coordinates[0]-2][self.coordinates[1]-1]==4 or COC.idArray[self.coordinates[0]-2][self.coordinates[1]]==4):
-                    
-                    
+
                     Townhall.health -= 1 
                     if(Townhall.health == 0):
                         COC.idArray[self.coordinates[0]-2][self.coordinates[1]-1] = 0
                         COC.idArray[self.coordinates[0]-2][self.coordinates[1]] = 0 
             
+            # Row down has object
             if(COC.idArray[self.coordinates[0]+1][self.coordinates[1]-1]!=0 or COC.idArray[self.coordinates[0]+1][self.coordinates[1]]!=0):
                     print(1)
                     if(COC.idArray[self.coordinates[0]+1][self.coordinates[1]-1]==7 or COC.idArray[self.coordinates[0]+1][self.coordinates[1]]==7):
@@ -161,7 +172,7 @@ class King:
                         if(Townhall.health == 0):
                             COC.idArray[self.coordinates[0]+1][self.coordinates[1]-1] = 0
                             COC.idArray[self.coordinates[0]+1][self.coordinates[1]] = 0
-              
+            # Column left
             if(COC.idArray[self.coordinates[0]-1][self.coordinates[1]-2]!=0 or COC.idArray[self.coordinates[0]][self.coordinates[1]-2]!=0):
                     if(COC.idArray[self.coordinates[0]-1][self.coordinates[1]-2]==7 or COC.idArray[self.coordinates[0]][self.coordinates[1]-2]==7):
                         length = len(wallsList)
@@ -206,6 +217,8 @@ class King:
                         if(Townhall.health == 0):
                             COC.idArray[self.coordinates[0]-1][self.coordinates[1]-2] = 0
                             COC.idArray[self.coordinates[0]][self.coordinates[1]-2] = 0
+
+            # Column right
             if(COC.idArray[self.coordinates[0]-1][self.coordinates[1]+1]!=0 or COC.idArray[self.coordinates[0]][self.coordinates[1]+1]!=0):
                     if(COC.idArray[self.coordinates[0]-1][self.coordinates[1]+1]==7 or COC.idArray[self.coordinates[0]][self.coordinates[1]+1]==7):
                         length = len(wallsList)
@@ -239,7 +252,7 @@ class King:
                         for i in range(length):
                             Canon = canonsList[i]
                             if(Canon.coordinates[0]==self.coordinates[0]-1 and Canon.coordinates[1]==self.coordinates[1]+1 and Canon.health!=0):
-                                Canon.health -= 1 
+                                Canon.health -= 1
                             if(Canon.coordinates[0]==self.coordinates[0] and Canon.coordinates[1] == self.coordinates[1]+1 and Canon.health!=0):
                                 Canon.health -= 1 
                             if(Canon.health == 0):
