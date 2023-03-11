@@ -1,4 +1,5 @@
 from distutils.command.build import build
+# 'Fore' is never used
 from colorama import Fore, Back, Style
 import math
 
