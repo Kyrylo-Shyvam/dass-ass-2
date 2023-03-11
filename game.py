@@ -1,5 +1,5 @@
 from array import array
-from distutils.spawn import spawn # Why do we need this; not used?
+from distutils.spawn import spawn # Why do we need this; not used? It is used. Search the file.
 from pickle import TRUE  # Used to auto reset colorama. Why?
 import time
 import colorama
@@ -46,7 +46,7 @@ num=str(fileNum) # Number of files in replay directory + 1 extra
 file=file+num+".txt" # Name of new file?
 
 rageTime = -1    # Is it not working?
-healTime = time.time() # Time since 1970, why?
+healTime = time.time() # Time since 1970, why? They are using this variable to keep track of the amount of time that heal has been active. So its logically fine.
 
 rows = 40
 columns = 80 # Already mentioned in gameclass?

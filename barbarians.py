@@ -22,7 +22,7 @@ class Barbarians:
             self.color = Back.LIGHTRED_EX + str(self.health) + Style.RESET_ALL
         else:
             self.color = Back.LIGHTBLACK_EX + "  " + Style.RESET_ALL
-            self.death = True
+            self.death = True # if you can always access health of the barb, why do you need this variable?
 
         colorArray[self.coordinates[0]][self.coordinates[1]] = self.color
         return colorArray
