@@ -32,18 +32,18 @@ class King:
         if(self.key =='w'):
             ##print(idArray[self.coordinates[0]-1][self.coordinates[1]-2],idArray[self.coordinates[0]][self.coordinates[1]-2])
             print(idArray[self.coordinates[0]-2][self.coordinates[1]-1], idArray[self.coordinates[0]-2][self.coordinates[1]])
-            if(self.coordinates[0]> 1 and  self.coordinates[0] < 39):
+            if(self.coordinates[0]> 1 and  self.coordinates[0] < 39): # see issue 10
                 if(idArray[self.coordinates[0]-2][self.coordinates[1]-1]==0 and idArray[self.coordinates[0]-2][self.coordinates[1]]==0):
                 
                     self.coordinates[0]-= self.velocity
         elif(self.key=='s'):
-            if(self.coordinates[0]> 1 and  self.coordinates[0] < 39):
+            if(self.coordinates[0]> 1 and  self.coordinates[0] < 39): # see issue 10
                 if(idArray[self.coordinates[0]+1][self.coordinates[1]-1]==0 and idArray[self.coordinates[0]+1][self.coordinates[1]]==0):
                 
                     self.coordinates[0]+=self.velocity
         elif(self.key=='a'):
             ##print(idArray[self.coordinates[0]-2][self.coordinates[1]-1])
-            if(self.coordinates[1]>1 and self.coordinates[1]<79):
+            if(self.coordinates[1]>1 and self.coordinates[1]<79): # see issue 10
                 if(idArray[self.coordinates[0]-1][self.coordinates[1]-2]==0 and idArray[self.coordinates[0]][self.coordinates[1]-2]==0):
                 
                     
@@ -55,7 +55,7 @@ class King:
                 
                     self.coordinates[1]+=self.velocity
         elif(self.key == ' '):
-            if(self.coordinates[1]>1 and self.coordinates[1]<79 and self.coordinates[0]> 1 and  self.coordinates[0] < 39):
+            if(self.coordinates[1]>1 and self.coordinates[1]<79 and self.coordinates[0]> 1 and  self.coordinates[0] < 39): # see issue 10
                 pass
     def attack(self,COC,Townhall,hut,canon,wall):
         hutsList = hut.hutsList

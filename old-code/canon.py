@@ -33,14 +33,14 @@ class Canon:
         print(self.occupied)
         self.target = None
         if(self.victim!=None):
-            if(abs(self.victim.coordinates[0]-self.coordinates[0])<5 and abs(self.victim.coordinates[1]-self.coordinates[1])<5):
+            if(abs(self.victim.coordinates[0]-self.coordinates[0])<5 and abs(self.victim.coordinates[1]-self.coordinates[1])<5): # see issue 10
                             
                 print('yess')
             else:
                 print('nooo')
                 self.victim = None
                 self.occupied = False
-        if(abs(king.coordinates[0]-self.coordinates[0])<5 and abs(king.coordinates[1]-self.coordinates[1])<5 and king.death == False):
+        if(abs(king.coordinates[0]-self.coordinates[0])<5 and abs(king.coordinates[1]-self.coordinates[1])<5 and king.death == False): # see issue 10
             distance = abs(king.coordinates[0]-self.coordinates[0]) + abs(king.coordinates[1]-self.coordinates[1])
             if(distance<min_distance):
                 min_distance = distance
@@ -67,7 +67,7 @@ class Canon:
                         self.occupied = False
             else:
                 print(self.coordinates, self.victim.coordinates)
-                print(abs(self.victim.coordinates[0]-self.coordinates[0])<5 and abs(self.victim.coordinates[0]-self.coordinates[0])<5)
+                print(abs(self.victim.coordinates[0]-self.coordinates[0])<5 and abs(self.victim.coordinates[0]-self.coordinates[0])<5) # see issue 10
                 if(self.target != self.victim):
                     if(abs(self.victim.coordinates[0]-self.coordinates[0])<5 and abs(self.victim.coordinates[1]-self.coordinates[1])<5):
                         

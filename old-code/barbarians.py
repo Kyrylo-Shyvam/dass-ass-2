@@ -56,7 +56,7 @@ class Barbarians:
     def move(self,idArray):
         if(self.target!=None):
             if(self.coordinates[0]<self.target.coordinates[0]):
-                if(idArray[self.coordinates[0]+1][self.coordinates[1]]==0 or idArray[self.coordinates[0]+1][self.coordinates[1]]==9):
+                if(idArray[self.coordinates[0]+1][self.coordinates[1]]==0 or idArray[self.coordinates[0]+1][self.coordinates[1]]==9): # see issue 10
                     self.coordinates[0]+=self.velocity
             elif(self.coordinates[0]>self.target.coordinates[0]):
                 if(idArray[self.coordinates[0]-1][self.coordinates[1]]==0 or idArray[self.coordinates[0]-1][self.coordinates[1]]==9):

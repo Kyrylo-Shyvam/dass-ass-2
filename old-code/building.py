@@ -154,7 +154,7 @@ class Townhall(Building):
         if(self.health>0):        
             for i in range(self.rows):
                 for j in range(self.columns):
-                    colorArray[int(40/2)-1+i][int(80/2)-1+j]= Back.YELLOW + " " + Style.RESET_ALL
+                    colorArray[int(40/2)-1+i][int(80/2)-1+j]= Back.YELLOW + " " + Style.RESET_ALL   # see issue 10
         elif(self.health > 5):
             for i in range(self.rows):
                 for j in range(self.columns):
@@ -185,7 +185,7 @@ class Townhall(Building):
     def idUpdate(self, idArray): 
         for i in range(self.rows):
             for j in range(self.columns):
-                idArray[int(40/2)-1+i][int(80/2)-1+j] = 4
+                idArray[int(40/2)-1+i][int(80/2)-1+j] = 4   # see issue 10
         """ for i in (18,22):
             for j in range(6):
                 idArray[i][int(80/2)-2+j] = 6

@@ -145,9 +145,9 @@ def rageEnd():
 def healStart():
     COC.color = Back.LIGHTYELLOW_EX + "  " + Style.RESET_ALL
     
-    Townhall.health = (3/2)*Townhall.health # see issue 6
+    Townhall.health = (3/2)*Townhall.health # see issue 6, 10
     for hut in Hut.hutsList:
-        hut.health = (3/2)*hut.health
+        hut.health = (3/2)*hut.health   # see issue 10
         if(hut.health>10):
             hut.health = 10
     for canon in Canon.canonsList:
