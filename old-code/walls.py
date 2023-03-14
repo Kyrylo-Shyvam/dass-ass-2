@@ -1,6 +1,7 @@
 from colorama import Back, Fore, Style
 
 class Wall:
+    # see issue 12
     wallsList = []
     def __init__(self, x, y):
         self.coordinates = [x, y]

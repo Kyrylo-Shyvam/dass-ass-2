@@ -78,6 +78,8 @@ for i in range(3):
         ##COC.colorArray = wall.render(COC.colorArray)
         wallsList.append(wall)
 barbariansList = []
+
+# see issue 12
 Hut.hutsList = hutsList
 Canon.canonsList = canonsList
 Wall.wallsList = wallsList

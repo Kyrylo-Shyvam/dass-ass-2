@@ -2,6 +2,7 @@ from colorama import Back, Style
 import time
 
 class Building:
+    # see issue 12
     buildingList = []
     def __init__(self,x,y):
         self.coordinates = [x,y]
@@ -12,6 +13,7 @@ class Building:
 
 
 class Hut(Building):
+    # see issue 12
     hutsList = []
     def __init__(self,x,y):
         super().__init__(x,y)
@@ -34,6 +36,7 @@ class Hut(Building):
 
 
 class Canon(Building):
+    # see issue 12
     canonsList = []
     def __init__(self,xCoordinate,yCoordinate):
         ##self.coordinates = [xCoordinate,yCoordinate]
@@ -83,7 +86,7 @@ class Canon(Building):
                 if(distance<min_distance):
                     min_distance = distance
                     self.target = king
-            for barbarian in Barbarians.barbariansList:
+            for barbarian in Barbarians.barbariansList: # see issue 12
                 if(abs(barbarian.coordinates[0]-self.coordinates[0])<5 and abs(barbarian.coordinates[1]-self.coordinates[1])<5):
                     distance = abs(barbarian.coordinates[0]-self.coordinates[0]) + abs(barbarian.coordinates[1]-self.coordinates[1])
                     if(barbarian.death == False):
@@ -121,6 +124,7 @@ class Canon(Building):
                         self.occupied = False
             
 class Wall(Building):
+    # see issue 12
     wallsList = []
     def __init__(self, x, y):
         super().__init__(x,y)

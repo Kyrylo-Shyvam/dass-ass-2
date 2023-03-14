@@ -4,6 +4,7 @@ from colorama import Back, Fore, Style
 import time
 
 class Canon:
+    # see issue 12
     canonsList = []
     def __init__(self,xCoordinate,yCoordinate):
         self.coordinates = [xCoordinate,yCoordinate]
