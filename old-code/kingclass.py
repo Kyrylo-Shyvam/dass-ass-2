@@ -28,6 +28,7 @@ class King:
         self.key = input_to(getch)
         return self.key
         
+    # see issue 11
     def move(self,idArray):
         if(self.key =='w'):
             ##print(idArray[self.coordinates[0]-1][self.coordinates[1]-2],idArray[self.coordinates[0]][self.coordinates[1]-2])
@@ -57,6 +58,8 @@ class King:
         elif(self.key == ' '):
             if(self.coordinates[1]>1 and self.coordinates[1]<79 and self.coordinates[0]> 1 and  self.coordinates[0] < 39): # see issue 10
                 pass
+
+    # see issue 11
     def attack(self,COC,Townhall,hut,canon,wall):
         hutsList = hut.hutsList
         canonsList = canon.canonsList
