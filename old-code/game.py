@@ -85,6 +85,8 @@ Barbarians.barbariansList = barbariansList
 """ getch = Get()
 for i in range(100):
     print(input_to(getch)) """
+
+# see issue 8
 def renderHuts():
     for i in range(len(Hut.hutsList)):
         COC.colorArray=Hut.hutsList[i].render(COC.colorArray)
