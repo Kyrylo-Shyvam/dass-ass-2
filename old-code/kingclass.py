@@ -20,6 +20,8 @@ class King:
         """ for i in range(self.rows):
             for j in range(self.columns):
                 colorArray[self.coordinates[0] - 1 + i][self.coordinates[1] - 1 + j] = self.color """
+
+    # see issue 9
     def input(self):
         getch = Get()
         print(self.coordinates[0],self.coordinates[1])
