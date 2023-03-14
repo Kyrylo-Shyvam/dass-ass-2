@@ -8,6 +8,7 @@ columns = 80
 rows = 40
 
 ##colorArray = [[Back.BLACK+" "+Style.RESET_ALL for i in range(columns)]for j in range(rows)]
+# see issue 7
 class Game:
     def __init__(self, rows, columns):
         ##baseColor = 

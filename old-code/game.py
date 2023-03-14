@@ -43,7 +43,7 @@ rageTime = -1
 healTime = time.time()
 rows = 40
 columns = 80
-COC=Game(rows,columns)
+COC=Game(rows,columns) # see issue 7
 king = King()
 COC.render()
 townhall = Townhall()
