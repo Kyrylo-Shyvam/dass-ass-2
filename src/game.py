@@ -5,14 +5,14 @@ import time
 import colorama
 from colorama import Fore, Back, Style
 import time
-from townhall import Townhall
+from townhall import Townhall # see issue 6
 colorama.init(autoreset=TRUE)
 import numpy as np
 from gameclass import Game
 from kingclass import King
 from input import input_to, Get
 from os import system
-from building import Townhall
+from building import Townhall # see issue 6
 from building import Canon
 from building import Hut
 from building import Wall
@@ -143,7 +143,7 @@ def rageEnd():
 def healStart():
     COC.color = Back.LIGHTYELLOW_EX + "  " + Style.RESET_ALL
     
-    Townhall.health = (3/2)*Townhall.health
+    Townhall.health = (3/2)*Townhall.health # see issue 6
     for hut in Hut.hutsList:
         hut.health = (3/2)*hut.health
         if(hut.health>10):
@@ -252,9 +252,3 @@ while(1):
     file_name.write("\n".join(["".join(row) for row in COC.colorArray]))
     file_name.write("\n")
     file_name.close()
-    
-        
-        
-
-
-    
