@@ -132,6 +132,7 @@ class Wall(Building):
     def render(self, colorArray):
         
         if(self.health <= 0):
+            # see issue 17
             self.color = Back.LIGHTGREEN_EX + " " + Style.RESET_ALL
         else:
             self.color = Back.LIGHTBLACK_EX + " " + Style.RESET_ALL
