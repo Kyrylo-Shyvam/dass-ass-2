@@ -147,7 +147,7 @@ def rageEnd():
 def healStart():
     COC.color = Back.LIGHTYELLOW_EX + "  " + Style.RESET_ALL
     
-    Townhall.health = (3/2)*Townhall.health # see issue 6, 10
+    Townhall.health = (3/2)*Townhall.health # see issue 6, 10, 18
     for hut in Hut.hutsList:
         hut.health = (3/2)*hut.health   # see issue 10
         if(hut.health>10):
@@ -226,7 +226,7 @@ while(1):
         rageEnd()
         rageTime = time.time()
 
-    if(key == 'h'):
+    if(key == 'h'): # see issue 18
         healTime = time.time()
         healStart()
     if(time.time()-healTime>=5):
