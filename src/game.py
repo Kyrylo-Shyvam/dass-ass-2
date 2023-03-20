@@ -42,7 +42,6 @@ hutsList = []
 
 for i in range(5):
     hut = Hut(hutsCoordinates[i][0],hutsCoordinates[i][1])
-    
     COC.colorArray = hut.render(COC.colorArray)
     hutsList.append(hut)
 
@@ -93,6 +92,7 @@ def renderBarbarians():
 def canonShoot():
     for i in range(len(canonsList)):
         canonsList[i].shoot(king,Barbarians)
+
 def spawn(key):
     if(key == 'z'):
         barbarian = Barbarians(38,22)
@@ -217,10 +217,8 @@ while(1):
     if(key == ' '):
         king.attack(COC,townhall,Hut,Canon,Wall)
 
-
-    COC.colorArray = king.update(COC.colorArray)
+    COC.colorArray = king.render(COC.colorArray)
     COC.idArray = king.idUpdate(COC.idArray)
-    king.healthDisplay(COC.colorArray)
     if(checkVictory()==True):
         COC.colorArray= [[Back.LIGHTGREEN_EX + " " + Style.RESET_ALL for i in range(columns)]for j in range(rows)]
         for i in range(8):

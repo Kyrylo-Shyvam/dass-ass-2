@@ -1,5 +1,4 @@
-from distutils.command.build import build
-from colorama import Fore, Back, Style
+from colorama import Back, Style
 import math
 
 def distance(x1,y1,x2,y2):

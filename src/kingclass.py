@@ -1,14 +1,10 @@
-
 import colorama
 from colorama import Back, Fore, Style
 
 ##from game import COC
 
-from input import input_to, Get
-
 class King: 
     def __init__(self):
-        getch = Get()
         self.coordinates = [25,55]
         self.rows = 2
         self.columns = 2
@@ -17,29 +13,21 @@ class King:
         self.health = 100
         self.death = False
         self.velocity = 1
-        """ for i in range(self.rows):
-            for j in range(self.columns):
-                colorArray[self.coordinates[0] - 1 + i][self.coordinates[1] - 1 + j] = self.color """
-    def input(self):
-        getch = Get()
-        print(self.coordinates[0],self.coordinates[1])
-        self.key = input_to(getch)
-        return self.key
         
-    def move(self,idArray):
-        if(self.key =='w'):
+    def move(self,key,idArray):
+        if(key =='w'):
             ##print(idArray[self.coordinates[0]-1][self.coordinates[1]-2],idArray[self.coordinates[0]][self.coordinates[1]-2])
             print(idArray[self.coordinates[0]-2][self.coordinates[1]-1], idArray[self.coordinates[0]-2][self.coordinates[1]])
             if(self.coordinates[0]> 1 and  self.coordinates[0] < 39):
                 if(idArray[self.coordinates[0]-2][self.coordinates[1]-1]==0 and idArray[self.coordinates[0]-2][self.coordinates[1]]==0):
                 
                     self.coordinates[0]-= self.velocity
-        elif(self.key=='s'):
+        elif(key=='s'):
             if(self.coordinates[0]> 1 and  self.coordinates[0] < 39):
                 if(idArray[self.coordinates[0]+1][self.coordinates[1]-1]==0 and idArray[self.coordinates[0]+1][self.coordinates[1]]==0):
                 
                     self.coordinates[0]+=self.velocity
-        elif(self.key=='a'):
+        elif(key=='a'):
             ##print(idArray[self.coordinates[0]-2][self.coordinates[1]-1])
             if(self.coordinates[1]>1 and self.coordinates[1]<79):
                 if(idArray[self.coordinates[0]-1][self.coordinates[1]-2]==0 and idArray[self.coordinates[0]][self.coordinates[1]-2]==0):
@@ -47,12 +35,12 @@ class King:
                     
                     self.coordinates[1]-=self.velocity
             
-        elif(self.key=='d'):
+        elif(key=='d'):
             if(self.coordinates[1]>1 and self.coordinates[1]<79):
                 if(idArray[self.coordinates[0]-1][self.coordinates[1]+1]==0 and idArray[self.coordinates[0]][self.coordinates[1]+1]==0):
                 
                     self.coordinates[1]+=self.velocity
-        elif(self.key == ' '):
+        elif(key == ' '):
             if(self.coordinates[1]>1 and self.coordinates[1]<79 and self.coordinates[0]> 1 and  self.coordinates[0] < 39):
                 pass
     def attack(self,COC,Townhall,hut,canon,wall):
@@ -251,7 +239,7 @@ class King:
                             COC.idArray[self.coordinates[0]-1][self.coordinates[1]+1] = 0
                             COC.idArray[self.coordinates[0]][self.coordinates[1]+1] = 0
                             
-    def update(self,colorArray):
+    def render(self,colorArray):
         self.color = Back.CYAN + str(self.health) + Style.RESET_ALL
         if(self.health>=0):
             self.color = Back.CYAN + " " + Style.RESET_ALL
@@ -261,9 +249,7 @@ class King:
         for i in range(self.rows):
             for j in range(self.columns):
                 colorArray[self.coordinates[0] - 1 + j][self.coordinates[1] - 1 + i] = self.color
-
-                
-        return colorArray
+        return self.healthDisplay(colorArray)
 
     def idUpdate(self,idArray):
         for i in range(self.rows):
