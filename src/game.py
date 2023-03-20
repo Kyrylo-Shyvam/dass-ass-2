@@ -1,17 +1,9 @@
-from array import array
-from distutils.spawn import spawn
-from pickle import TRUE
 import time
-import colorama
-from colorama import Fore, Back, Style
+from colorama import Back, Style
 import time
 from townhall import Townhall
-colorama.init(autoreset=TRUE)
-import numpy as np
 from gameclass import Game
 from kingclass import King
-from input import input_to, Get
-from os import system
 from building import Townhall
 from building import Canon
 from building import Hut
@@ -19,12 +11,7 @@ from building import Wall
 from barbarians import Barbarians
 from building import Building
 import os
-""" arrays = [[0 for i in range(10)] for j in range(10)]
-for i in range(10):
-    for j in range(10):
-        arrays[i][j] = Back.BLUE+Fore.RED+"  "+Style.RESET_ALL
 
-print("\n".join(["".join(row) for row in arrays])) """
 fileNum=1
 if not os.path.exists('./replay'):
     os.makedirs('./replay')
@@ -82,9 +69,7 @@ Hut.hutsList = hutsList
 Canon.canonsList = canonsList
 Wall.wallsList = wallsList
 Barbarians.barbariansList = barbariansList
-""" getch = Get()
-for i in range(100):
-    print(input_to(getch)) """
+
 def renderHuts():
     for i in range(len(Hut.hutsList)):
         COC.colorArray=Hut.hutsList[i].render(COC.colorArray)
@@ -246,7 +231,6 @@ while(1):
         for i in range(8):
             COC.colorArray[int(rows/2)-1][int(columns/2)-4+i] = Back.LIGHTRED_EX + defeat[i] + Style.RESET_ALL
     
-    system('clear')
     COC.render()
     file_name=open(file,"a")
     file_name.write("\n".join(["".join(row) for row in COC.colorArray]))
