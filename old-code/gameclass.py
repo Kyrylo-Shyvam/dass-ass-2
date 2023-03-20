@@ -3,7 +3,7 @@ import colorama
 from colorama import Back, Fore, Style
 import math
 import numpy as np
-colorama.init(autoreset=TRUE)
+colorama.init(autoreset=TRUE) # see issue #22
 columns = 80
 rows = 40
 

@@ -6,7 +6,7 @@ import colorama
 from colorama import Fore, Back, Style
 import time
 from townhall import Townhall # see issue 6
-colorama.init(autoreset=TRUE)
+colorama.init(autoreset=TRUE) # see issue 22
 import numpy as np
 from gameclass import Game
 from kingclass import King
