@@ -54,26 +54,26 @@ class Barbarians:
        
     ##barbarian movement
     def move(self,idArray):
-        if(self.target!=None):
-            if(self.coordinates[0]<self.target.coordinates[0]):
-                if(idArray[self.coordinates[0]+1][self.coordinates[1]]==0 or idArray[self.coordinates[0]+1][self.coordinates[1]]==9):
-                    self.coordinates[0]+=self.velocity
-            elif(self.coordinates[0]>self.target.coordinates[0]):
-                if(idArray[self.coordinates[0]-1][self.coordinates[1]]==0 or idArray[self.coordinates[0]-1][self.coordinates[1]]==9):
-                    self.coordinates[0]-=self.velocity
-            elif(self.coordinates[1]<self.target.coordinates[1]):
-                if(idArray[self.coordinates[0]][self.coordinates[1]+1]==0 or idArray[self.coordinates[0]][self.coordinates[1]+1]==9):
-                    self.coordinates[1]+=self.velocity
-            elif(self.coordinates[1]>self.target.coordinates[1]):
-                if(idArray[self.coordinates[0]][self.coordinates[1]-1]==0 or idArray[self.coordinates[0]][self.coordinates[1]-1]==9):
-                    self.coordinates[1]-=self.velocity
-            if(abs(self.coordinates[0]-self.target.coordinates[0])<=1 and abs(self.coordinates[1]-self.target.coordinates[1])<=1):
-                self.target.health-=2
-                if(self.target.health<=0):
-                    self.occupied = False
-                    self.target = None
+        if(self.target == None):
+            return idArray
+
+        done = False
+        for index in (0, 1):
+            for sign in (1, -1):
+                temp = idArray[self.coordinates[0] + sign*(1 - index)][self.coordinates[1] + sign*index]
+                if((sign*self.coordinates[index] < sign*self.target.coordinates[index]) and
+                   (( temp == 0 ) or
+                    ( temp == 9 ))):
+                    self.coordinates[index] = self.coordinates[index] + sign*self.velocity
+                    done = True
+                    break
+            if(done): break
+            
+        if(abs(self.coordinates[0]-self.target.coordinates[0])<=1 and
+           abs(self.coordinates[1]-self.target.coordinates[1])<=1):
+            self.target.health-=2
+            if(self.target.health<=0):
+                self.occupied = False
+                self.target = None
+        
         return idArray
-
-
-
-
