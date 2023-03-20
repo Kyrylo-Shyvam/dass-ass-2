@@ -139,6 +139,7 @@ class Game:
         key = input_to(Get())
         os.system('clear')
 
+        self.spawn(key)
         if(key == 'r'):
             self.rageTime = time.time()
             self.rageStart()
