@@ -53,6 +53,7 @@ class Barbarians:
             self.occupied = False
        
     ##barbarian movement
+    # see issue 20
     def move(self,idArray):
         if(self.target!=None):
             if(self.coordinates[0]<self.target.coordinates[0]):
