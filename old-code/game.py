@@ -1,5 +1,5 @@
 from array import array
-from distutils.spawn import spawn
+from distutils.spawn import spawn # see issue 23
 from pickle import TRUE
 import time
 import colorama
@@ -112,6 +112,7 @@ def renderBarbarians():
 def canonShoot():
     for i in range(len(canonsList)):
         canonsList[i].shoot(king,Barbarians)
+# see issue 23
 def spawn(key):
     if(key == 'z'):
         barbarian = Barbarians(38,22)
