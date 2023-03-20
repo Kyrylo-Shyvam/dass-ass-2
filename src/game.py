@@ -5,7 +5,6 @@ import time
 import colorama
 from colorama import Fore, Back, Style
 import time
-from townhall import Townhall
 colorama.init(autoreset=TRUE)
 import numpy as np
 from gameclass import Game
@@ -143,7 +142,7 @@ def rageEnd():
 def healStart():
     COC.color = Back.LIGHTYELLOW_EX + "  " + Style.RESET_ALL
     
-    Townhall.health = (3/2)*Townhall.health
+    townhall.health = (3/2) * townhall.health
     for hut in Hut.hutsList:
         hut.health = (3/2)*hut.health
         if(hut.health>10):
