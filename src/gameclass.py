@@ -20,6 +20,8 @@ rows = 40
 
 hutsCoordinates = [[8,2],[13,60],[35,73],[7,15],[37,72]]
 canonPositions = [[20,60],[35,20]]
+victory = ['v','i','c','t','o','r','y','!']
+defeat = ['d','e','f','e','a','t',':','(']
 
 class Game:
     def __init__(self):
@@ -76,7 +78,60 @@ class Game:
         self.color = Back.LIGHTGREEN_EX + " " + Style.RESET_ALL
         self.king.velocity = 1
         Barbarians.velocity = 1
+
+    def healStart(self):
+        self.color = Back.LIGHTYELLOW_EX + " " + Style.RESET_ALL
+
+        self.townhall.health = (3/2) * self.townhall.health
+        for hut in Hut.hutsList:
+            hut.health = (3/2)*hut.health
+            if(hut.health>10):
+                hut.health = 10
+        for canon in Canon.canonsList:
+            canon.health = (3/2)*canon.health
+            if(canon.health>10):
+                canon.health = 10
+
+    def healEnd(self):
+        self.color = Back.LIGHTGREEN_EX + " " + Style.RESET_ALL
+
+    def narikey(self):
+        for building in Building.buildingList:
+            if(abs(building.coordinates[0] - self.king.coordinates[0]) < 5 and 
+               abs(building.coordinates[1] - self.king.coordinates[1]) < 5):
+                building.health = building.health - 5
         
+    def checkVictory(self):
+        check = False
+        if(self.townhall.death == True):
+            check = True
+        else:
+            return False
+        for hut in Hut.hutsList:
+            if(hut.death == True):
+                check = True
+            else:
+                return False
+        for canon in Canon.canonsList:
+            if(canon.death == True):
+                check = True
+            else:
+                return False
+        return check
+
+    def checkDefeat(self):
+        check = False
+        for barbarian in Barbarians.barbariansList:
+            if(barbarian.death == True):
+                check = True
+            else:
+                return False
+        if(self.king.death == True):
+            check = True
+        else:
+            return False
+        return check
+
     def render(self):
         key = input_to(Get())
         os.system('clear')
@@ -88,12 +143,20 @@ class Game:
             self.rageEnd()
             self.rageTime = time.time()
 
+        if(key == 'h'):
+            self.healTime = time.time()
+            self.healStart()
+        if(time.time() - self.healTime >= 5):
+            self.healEnd()
+
+        if(key == 'x'):
+            self.narikey()
+
+        if(key == ' '):
+            self.king.attack(self, self.townhall, Hut, Canon, Wall)
+
         # clear board
         self.board(rows, columns)
-
-        self.king.move(key, self.idArray)
-        self.colorArray = self.king.render(self.colorArray)
-        self.idArray = self.king.idUpdate(self.idArray)
 
         # render all buildings
         buildings = Building.buildingList
@@ -101,8 +164,24 @@ class Game:
             self.colorArray = buildings[i].render(self.colorArray)
             self.idArray = buildings[i].idUpdate(self.idArray)
 
+        self.king.move(key, self.idArray)
+        self.colorArray = self.king.render(self.colorArray)
+        self.idArray = self.king.idUpdate(self.idArray)
+
+        if(self.checkVictory()==True):
+            self.colorArray= [[Back.LIGHTGREEN_EX + " " + Style.RESET_ALL for _ in range(columns)]for _ in range(rows)]
+            for i in range(8):
+                self.colorArray[int(rows/2)-1][int(columns/2)-4+i] = Back.GREEN + victory[i] + Style.RESET_ALL
+            return False
+        if(self.checkDefeat()==True):
+            self.colorArray= [[Back.LIGHTRED_EX + " " + Style.RESET_ALL for i in range(columns)]for j in range(rows)]
+            for i in range(8):
+                self.colorArray[int(rows/2)-1][int(columns/2)-4+i] = Back.LIGHTRED_EX + defeat[i] + Style.RESET_ALL
+            return False # originally it didnt close
+
         print("\n".join(["".join(row) for row in self.colorArray]))
+        return True
 
 game = Game()
-while 1:
-    game.render()
+while game.render():
+    pass

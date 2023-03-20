@@ -146,7 +146,7 @@ class Townhall(Building):
         Building.buildingList.append(self)
         self.rows = 4
         self.columns = 3
-        self.health = 10
+        self.health = 10.0
         self.death = False
 
     def render(self, colorArray):
