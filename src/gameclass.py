@@ -97,6 +97,9 @@ class Game:
 
     def narikey(self):
         for building in Building.buildingList:
+            if isinstance(building, Townhall):
+                continue
+
             if(abs(building.coordinates[0] - self.king.coordinates[0]) < 5 and 
                abs(building.coordinates[1] - self.king.coordinates[1]) < 5):
                 building.health = building.health - 5
@@ -159,14 +162,22 @@ class Game:
         self.board(rows, columns)
 
         # render all buildings
-        buildings = Building.buildingList
-        for i in range(len(buildings)):
-            self.colorArray = buildings[i].render(self.colorArray)
-            self.idArray = buildings[i].idUpdate(self.idArray)
+        for building in Building.buildingList:
+            self.colorArray = building.render(self.colorArray)
+            self.idArray = building.idUpdate(self.idArray)
 
         self.king.move(key, self.idArray)
         self.colorArray = self.king.render(self.colorArray)
         self.idArray = self.king.idUpdate(self.idArray)
+
+        for cannon in Canon.canonsList:
+            cannon.shoot(self.king, Barbarians)
+
+        for barbarian in Barbarians.barbariansList:
+            barbarian.choose(Building)
+            barbarian.move(self.idArray)
+            self.colorArray = barbarian.render(self.colorArray)
+            self.idArray = barbarian.idUpdate(self.idArray)
 
         if(self.checkVictory()==True):
             self.colorArray= [[Back.LIGHTGREEN_EX + " " + Style.RESET_ALL for _ in range(columns)]for _ in range(rows)]
