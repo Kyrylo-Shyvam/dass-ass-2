@@ -8,13 +8,12 @@ class Building:
         self.health = 10
         self.death = False
         Building.buildingList.append(self)
-    
-
 
 class Hut(Building):
     hutsList = []
     def __init__(self,x,y):
         super().__init__(x,y)
+        Hut.hutsList.append(self)
         
     def render(self,colorArray):
         if(self.health <=0):
@@ -36,16 +35,15 @@ class Hut(Building):
 class Canon(Building):
     canonsList = []
     def __init__(self,xCoordinate,yCoordinate):
-        ##self.coordinates = [xCoordinate,yCoordinate]
-        ##self.health = 10
         super().__init__(xCoordinate,yCoordinate)
         self.occupied = False
         self.victim = None
         self.target = None
         self.init = time.time()
+        Canon.canonsList.append(self)
         
         ##self.death = False
-    def render(self,colorArray,):
+    def render(self,colorArray):
          
         ## canons
         if(self.health>7):
@@ -124,6 +122,7 @@ class Wall(Building):
     wallsList = []
     def __init__(self, x, y):
         super().__init__(x,y)
+        Wall.wallsList.append(self)
         
     def render(self, colorArray):
         
@@ -143,14 +142,14 @@ class Wall(Building):
     
         
 class Townhall(Building):
-    
-
     def __init__(self):
+        Building.buildingList.append(self)
         self.rows = 4
         self.columns = 3
-        self.health = 10
+        self.health = 10.0
         self.death = False
-    def render(self,colorArray,idArray):
+
+    def render(self, colorArray):
         if(self.health>0):        
             for i in range(self.rows):
                 for j in range(self.columns):
@@ -159,39 +158,19 @@ class Townhall(Building):
             for i in range(self.rows):
                 for j in range(self.columns):
                     colorArray[int(40/2)-1+i][int(80/2)-1+j]= Back.LIGHTYELLOW_EX + " " + Style.RESET_ALL
-
         elif(self.health > 3):
             for i in range(self.rows):
                 for j in range(self.columns):
                     colorArray[int(40/2)-1+i][int(80/2)-1+j]= Back.LIGHTRED_EX + " " + Style.RESET_ALL
-        
         else:
             self.death = True
             for i in range(self.rows):
                 for j in range(self.columns):
                     colorArray[int(40/2)-1+i][int(80/2)-1+j]= Back.LIGHTBLACK_EX + " " + Style.RESET_ALL
-
-         
-        
-        """ for i in (18,22):
-            for j in range(6):
-                colorArray[i][int(80/2)-2+j] = Back.LIGHTBLACK_EX + str(idArray[i][int(80/2)-2+j]) + Style.RESET_ALL
-
-
-        for i in range(3):
-            for j in (38,43):
-                colorArray[int(40/2)-1+i][j]= Back.LIGHTBLACK_EX + str(idArray[int(40/2)-1+i][j]) + Style.RESET_ALL """
         return colorArray 
+
     def idUpdate(self, idArray): 
         for i in range(self.rows):
             for j in range(self.columns):
                 idArray[int(40/2)-1+i][int(80/2)-1+j] = 4
-        """ for i in (18,22):
-            for j in range(6):
-                idArray[i][int(80/2)-2+j] = 6
-
-
-        for i in range(3):
-            for j in (38,43):
-                idArray[int(40/2)-1+i][j]= 6 """
         return idArray

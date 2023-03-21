@@ -1,5 +1,5 @@
-from distutils.command.build import build
-from colorama import Fore, Back, Style
+from colorama import Back, Style
+from building import Townhall
 import math
 
 def distance(x1,y1,x2,y2):
@@ -14,6 +14,7 @@ class Barbarians:
         self.death = False
         self.target = None
         self.occupied = False
+        Barbarians.barbariansList.append(self)
         
     def render(self,colorArray):
         ## barbarians
@@ -37,7 +38,9 @@ class Barbarians:
             print('barbPeek')
             min_distance = 1000
             for building in Building.buildingList:
-                
+                if isinstance(building, Townhall):
+                    continue
+
                 if(distance(self.coordinates[0],self.coordinates[1],building.coordinates[0],building.coordinates[1])<min_distance):
                     
 
