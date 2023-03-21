@@ -10,7 +10,7 @@ class Barbarians:
     velocity = 1
     def __init__(self,xCoordinate,yCoordinate):
         self.coordinates = [xCoordinate,yCoordinate]
-        self.health = 10
+        self.health = 9
         self.death = False
         self.target = None
         self.occupied = False
