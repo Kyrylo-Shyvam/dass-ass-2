@@ -21,7 +21,7 @@ class Barbarians:
         if(self.health>0):
             self.color = Back.LIGHTRED_EX + str(self.health) + Style.RESET_ALL
         else:
-            self.color = Back.LIGHTBLACK_EX + "  " + Style.RESET_ALL
+            self.color = Back.LIGHTBLACK_EX + " " + Style.RESET_ALL
             self.death = True
         
         colorArray[self.coordinates[0]][self.coordinates[1]] = self.color
@@ -42,13 +42,9 @@ class Barbarians:
                     continue
 
                 if(distance(self.coordinates[0],self.coordinates[1],building.coordinates[0],building.coordinates[1])<min_distance):
-                    
-
-                    
                     if(building.death==False):
                         self.target = building
                         min_distance = distance(self.coordinates[0],self.coordinates[1],building.coordinates[0],building.coordinates[1])
-                    
             self.occupied = True
             
         if(self.target.health<=0):
